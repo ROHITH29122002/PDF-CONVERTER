@@ -11,10 +11,6 @@ app.use(express.static('Static'))
 
 const uploads = multer({ dest: 'Files/' })
 
-app.get('/', (req, res) => {
-	res.send("Welcome to root URL of Server");
-});
-
 
 app.post('/', uploads.array("files", 20), (req, res) => {
 	var output = [];
