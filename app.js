@@ -12,7 +12,7 @@ app.use(express.static('Static'))
 const uploads = multer({ dest: 'Files/' })
 
 
-app.post('https://hts-pdf-converter.herokuapp.com', uploads.array("files", 20), (req, res) => {
+app.post('hts-pdf-converter.herokuapp.com/', uploads.array("files", 20), (req, res) => {
 	var output = [];
 	var len = req.files.length
 	req.files.forEach((file) => {
