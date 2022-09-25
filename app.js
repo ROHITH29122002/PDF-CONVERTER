@@ -16,8 +16,6 @@ app.post('/', uploads.array("words", 20), (req, res) => {
 	var output = [];
 	var len = req.files.length
 	req.files.forEach((file) => {
-		var pattern = /\.([0-9a-z]+)(?:[\?#]|$)/i
-		if(file.originalname.match(pattern)[1]==='docx'){
 			converter(file.path, `PDF/${file.filename}.pdf`, (err, result) => {
 				if (err) {
 					console.log(err);
@@ -32,7 +30,7 @@ app.post('/', uploads.array("words", 20), (req, res) => {
 			}
 			)
 		}
-	})
+	)
 	while (output[len - 1] === undefined) {
 		require('deasync').sleep(100);
 	}
