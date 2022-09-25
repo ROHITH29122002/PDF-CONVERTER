@@ -122,14 +122,30 @@
                 >
                   Close
                 </button>
-                <form
-                  method="POST"
-                  action="/upload"
-                  enctype="multipart/form-data"
-                  target="_blank"
-                >
-                  <input id="file_input" type="file" name="files" multiple />
-                  <input type="submit" />
+                <div>
+                  <span>IMG-PDF</span>
+                  <input
+                    accept="image/*"
+                    id="file_input"
+                    type="file"
+                    name="files"
+                    multiple
+                  />
+                  <input
+                    class="btn btn-primary"
+                    id="imgtopdf"
+                    type="submit"
+                    value="Convert"
+                  />
+                </div>
+                <form method="POST" action="/" enctype="multipart/form-data">
+                  <span>WORD-PDF</span>
+                  <input accept=".doc" type="file" name="words" multiple />
+                  <input
+                    class="btn btn-primary"
+                    type="submit"
+                    value="Convert"
+                  />
                 </form>
               </div>
             </div>
@@ -514,8 +530,6 @@
       const doc = new jsPDF();
       doc.addImage(newimg, 20, 20, 150, 250);
       doc.save(`${name}.pdf`);
-      document.getElementById("file_input").value = "";
-      location.reload();
     }
   </script>
 </html>

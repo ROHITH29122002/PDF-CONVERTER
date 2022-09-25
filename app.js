@@ -12,23 +12,26 @@ app.use(express.static('Static'))
 const uploads = multer({ dest: 'Files/' })
 
 
-app.post('/upload', uploads.array("files", 20), (req, res) => {
+app.post('/', uploads.array("words", 20), (req, res) => {
 	var output = [];
 	var len = req.files.length
 	req.files.forEach((file) => {
-		converter(file.path, `PDF/${file.filename}.pdf`, (err, result) => {
-			if (err) {
-				console.log(err);
-			}
-			else {
-				const item = {
-					path : result.filename,
-					name : `${file.filename}.pdf`
+		var pattern = /\.([0-9a-z]+)(?:[\?#]|$)/i
+		if(file.originalname.match(pattern)[1]==='docx'){
+			converter(file.path, `PDF/${file.filename}.pdf`, (err, result) => {
+				if (err) {
+					console.log(err);
 				}
-				output.push(item);
+				else {
+					const item = {
+						path : result.filename,
+						name : `${file.filename}.pdf`
+					}
+					output.push(item);
+				}
 			}
+			)
 		}
-		)
 	})
 	while (output[len - 1] === undefined) {
 		require('deasync').sleep(100);
